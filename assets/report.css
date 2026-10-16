@@ -1,0 +1,218 @@
+/* ==========================================================================
+   燕云十六声 · 百业战复盘报告 — 打印样式表（Chromium / Edge headless 导出）
+   ========================================================================== */
+
+:root {
+  --ink:        #1a1d21;
+  --ink-soft:   #444a52;
+  --ink-mute:   #6b7280;
+  --line:       #dfe3e8;
+  --line-soft:  #eef1f4;
+  --bg-soft:    #f7f9fa;
+  --brand:      #7a1f1f;   /* 主色：赭红（契合主题，低饱和以保证专业感） */
+  --brand-soft: #fbf3f3;
+  --sev-s:      #8b0000;
+  --sev-a:      #c0392b;
+  --sev-b:      #d68910;
+  --sev-c:      #7f8c8d;
+  --ok:         #1e7a4c;
+}
+
+/* ------------------------------ 页面设置 ------------------------------ */
+@page {
+  size: A4;
+  margin: 20mm 16mm 18mm 16mm;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 10.5pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB",
+               "Source Han Sans SC", "Noto Sans CJK SC", sans-serif;
+  line-height: 1.62;
+  font-size: 10.5pt;
+  text-align: justify;
+}
+
+/* ------------------------------ 封面 ------------------------------ */
+.cover {
+  page-break-after: always;
+  break-after: page;
+  padding-top: 26mm;
+  min-height: 220mm;
+}
+.cover .rule {
+  width: 64px; height: 5px; background: var(--brand);
+  margin-bottom: 10mm; border-radius: 2px;
+}
+.cover h1 {
+  font-size: 25pt; line-height: 1.28; margin: 0 0 6mm 0;
+  letter-spacing: .5px; color: var(--ink); border: 0; padding: 0;
+}
+.cover .subtitle {
+  font-size: 11pt; color: var(--ink-soft); margin: 0 0 12mm 0;
+  padding-bottom: 5mm; border-bottom: 1px solid var(--line);
+}
+.cover .meta { font-size: 10pt; color: var(--ink-mute); line-height: 2; }
+.cover .meta strong { color: var(--ink-soft); font-weight: 600; }
+.cover .stamp {
+  margin-top: 18mm; padding: 5mm 6mm; background: var(--brand-soft);
+  border-left: 4px solid var(--brand); font-size: 9.5pt; color: var(--ink-soft);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ------------------------------ 目录 ------------------------------ */
+.toc { page-break-after: always; break-after: page; }
+.toc h2 { border-bottom: 2px solid var(--brand); padding-bottom: 2mm; }
+.toc ol { list-style: none; padding-left: 0; margin: 4mm 0 0 0; }
+.toc li {
+  padding: 1.6mm 0; border-bottom: 1px dotted var(--line);
+  font-size: 10pt; color: var(--ink-soft);
+}
+.toc li.lv3 { padding-left: 7mm; font-size: 9.5pt; color: var(--ink-mute); }
+
+/* ------------------------------ 标题 ------------------------------ */
+h1, h2, h3, h4 { color: var(--ink); line-height: 1.35; }
+h2 {
+  font-size: 15pt; margin: 0 0 5mm 0; padding-bottom: 2mm;
+  border-bottom: 2px solid var(--brand);
+  page-break-before: always; break-before: page;
+  page-break-after: avoid; break-after: avoid;
+}
+h2.no-break { page-break-before: auto; break-before: auto; }
+h3 {
+  font-size: 12.5pt; margin: 8mm 0 3mm 0; padding-left: 3mm;
+  border-left: 4px solid var(--brand);
+  page-break-after: avoid; break-after: avoid;
+}
+h4 {
+  font-size: 11pt; margin: 6mm 0 2mm 0; color: var(--ink-soft);
+  page-break-after: avoid; break-after: avoid;
+}
+
+p { margin: 0 0 3mm 0; }
+ul, ol { margin: 0 0 3.5mm 0; padding-left: 6mm; }
+li { margin-bottom: 1.2mm; }
+strong { font-weight: 700; }
+
+hr { border: 0; border-top: 1px solid var(--line); margin: 6mm 0; }
+
+/* ------------------------------ 表格 ------------------------------ */
+table {
+  width: 100%; border-collapse: collapse; margin: 3mm 0 5mm 0;
+  font-size: 9.5pt; page-break-inside: avoid; break-inside: avoid;
+}
+thead { display: table-header-group; }
+th {
+  background: var(--brand); color: #fff; font-weight: 600;
+  text-align: left; padding: 2.2mm 2.6mm; border: 1px solid var(--brand);
+}
+td {
+  padding: 2.2mm 2.6mm; border: 1px solid var(--line);
+  vertical-align: top; text-align: left;
+}
+tbody tr:nth-child(even) { background: var(--bg-soft); }
+
+/* ------------------------------ 引用 / 提示框 ------------------------------ */
+blockquote {
+  margin: 3mm 0; padding: 2.5mm 4mm;
+  background: var(--bg-soft); border-left: 3px solid var(--ink-mute);
+  color: var(--ink-soft); font-size: 9.5pt;
+}
+blockquote p { margin: 0 0 1.5mm 0; }
+blockquote p:last-child { margin-bottom: 0; }
+
+/* 失误定级自动高亮：脚本会给包含定级的 blockquote 加类 */
+blockquote.sev-s { border-left-color: var(--sev-s); background: #fdf0f0; }
+blockquote.sev-a { border-left-color: var(--sev-a); background: #fdf2f0; }
+blockquote.sev-b { border-left-color: var(--sev-b); background: #fdf8ee; }
+blockquote.sev-c { border-left-color: var(--sev-c); background: #f6f7f8; }
+
+/* 内联定级标签 */
+.sev {
+  display: inline-block; padding: 0.2mm 1.6mm; border-radius: 3px;
+  font-size: 8.5pt; font-weight: 700; color: #fff; margin-right: 1mm;
+  vertical-align: 1px;
+}
+.sev.s { background: var(--sev-s); }
+.sev.a { background: var(--sev-a); }
+.sev.b { background: var(--sev-b); }
+.sev.c { background: var(--sev-c); }
+
+/* 优先级标签 */
+.pri {
+  display: inline-block; padding: 0.2mm 1.6mm; border-radius: 3px;
+  font-size: 8.5pt; font-weight: 700; margin-right: 1mm;
+}
+.pri.p0 { background: #fdeceb; color: var(--sev-a); border: 1px solid #f3c3bd; }
+.pri.p1 { background: #fdf6e7; color: #9a6a08; border: 1px solid #f0dcb0; }
+.pri.p2 { background: #eef4f0; color: var(--ok);  border: 1px solid #c6ded0; }
+
+/* ------------------------------ 图片 ------------------------------ */
+figure {
+  margin: 4mm 0; page-break-inside: avoid; break-inside: avoid; text-align: center;
+}
+figure img {
+  max-width: 100%; max-height: 190mm; border: 1px solid var(--line); border-radius: 3px;
+}
+figcaption {
+  font-size: 8.5pt; color: var(--ink-mute); margin-top: 1.5mm; text-align: center;
+}
+/* 单张图片必须整体留在同一页：
+   ① 段落不跨页；② 图片同时受 width/height 双约束，保证按比例缩小到一页内，
+   否则高瘦型（接触表 / 长截图）会被分页裁切。 */
+p:has(> img) { page-break-inside: avoid; break-inside: avoid; }
+/* 图题（紧跟图片的段落）不得与图片分离 */
+p:has(> img) + p { page-break-before: avoid; break-before: avoid; }
+img { max-width: 100%; max-height: 190mm; height: auto; object-fit: contain; }
+
+/* 帧网格（附录） */
+.frame-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2.5mm; margin: 3mm 0;
+}
+.frame-grid figure { margin: 0; }
+
+/* ------------------------------ 代码 ------------------------------ */
+code {
+  background: var(--bg-soft); padding: 0.2mm 1.2mm; border-radius: 3px;
+  font-family: Consolas, "Courier New", monospace; font-size: 9pt;
+}
+pre {
+  background: var(--bg-soft); padding: 3mm; border-radius: 4px;
+  border: 1px solid var(--line); overflow: hidden;
+  page-break-inside: avoid; break-inside: avoid;
+}
+pre code { background: none; padding: 0; }
+
+/* ------------------------------ 评分卡 ------------------------------ */
+.score-card {
+  display: flex; gap: 3mm; margin: 4mm 0; page-break-inside: avoid;
+}
+.score-card .item {
+  flex: 1; text-align: center; padding: 4mm 2mm;
+  border: 1px solid var(--line); border-radius: 5px; background: var(--bg-soft);
+}
+.score-card .item .num {
+  font-size: 19pt; font-weight: 700; color: var(--brand); line-height: 1.1;
+}
+.score-card .item .num small { font-size: 9pt; color: var(--ink-mute); font-weight: 400; }
+.score-card .item .label { font-size: 9pt; color: var(--ink-soft); margin-top: 1.5mm; }
+
+.callout {
+  margin: 4mm 0; padding: 3.5mm 4.5mm; border-radius: 4px;
+  background: var(--brand-soft); border-left: 4px solid var(--brand);
+  font-size: 10pt; page-break-inside: avoid;
+}
+.callout .k { font-weight: 700; color: var(--brand); }
+
+/* ------------------------------ 页脚信息（由脚本印字） ------------------------------ */
+.footer-note { font-size: 8.5pt; color: var(--ink-mute); }
