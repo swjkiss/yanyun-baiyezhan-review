@@ -59,6 +59,7 @@ SK="<本技能目录>/scripts"
 - 若 `duration_sec` 缺失 → **停止**，向用户确认文件是否为有效视频。
 - 若时长明显小于一场对局（如 < 10 分钟）→ 判定为剪辑/集锦，按 `highlight` 模式处理，**禁止输出全场节奏类结论**。
 
+<<<<<<< HEAD
 > **一键编排（推荐）**：阶段 1–2 的机械部分可用 `run_pipeline.py` 一次完成（探针 → L1/L2/scene 抽帧 → HUD 条带），并产出 `work/PIPELINE_DIGEST.json` 摘要：
 >
 > ```bash
@@ -67,6 +68,8 @@ SK="<本技能目录>/scripts"
 >
 > 长视频单步可能超过默认超时，可加 `--timeout 900` 或按下方分步命令执行。
 
+=======
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 ---
 
 ## 阶段 2 · 分层抽帧
@@ -104,6 +107,7 @@ SK="<本技能目录>/scripts"
     --out work/sheets/L1.jpg --cols 4 --per-page 16
 ```
 
+<<<<<<< HEAD
 2. **读 HUD 条带建立客观时间线（关键步骤）**：比分/击杀/鹅血量/人墙血量杯/指挥横幅/系统播报都是小字，
    整帧读容易误读，必须先用条带放大：
 
@@ -119,6 +123,11 @@ SK="<本技能目录>/scripts"
 3. 用 Read 工具逐张阅读 L1/L2 拼图；发现可疑段落 → 再读该段落的单帧原图（更清晰）。
 
 4. 重点抓取以下**锚点**（每确认一个就记录：视频时间、对局时间、帧文件名）：
+=======
+2. 用 Read 工具逐张阅读拼图；发现可疑段落 → 再读该段落的单帧原图（更清晰）。
+
+3. 重点抓取以下**锚点**（每确认一个就记录：视频时间、对局时间、帧文件名）：
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 
    - 准备阶段结束 / 开局
    - **中场分界**（中场表演提示、HUD 倒计时重置、明显转场）
@@ -127,9 +136,15 @@ SK="<本技能目录>/scripts"
    - 鹅 被击杀（我方 / 敌方）、树 出现与被搬运
    - 终局结算画面与判定依据
 
+<<<<<<< HEAD
 5. 产出 `work/timeline.json`，字段规范见 `references/analysis-framework.md` §2.3。
 
 6. 判定上下半场切分：优先用对局计时器；否则用中场事件；都用不上才等分，并标注「估算分界」。
+=======
+4. 产出 `work/timeline.json`，字段规范见 `references/analysis-framework.md` §2.3。
+
+5. 判定上下半场切分：优先用对局计时器；否则用中场事件；都用不上才等分，并标注「估算分界」。
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 
 > 若画面存在小地图与 HUD，可读取破塔状态、鹅的血量条、比分等客观字段，填入报告「对局概览」。
 
@@ -159,7 +174,11 @@ references/report-structure.md    # 报告章节与 Markdown 约定
 
 ## 阶段 5 · 生成报告与 PDF
 
+<<<<<<< HEAD
 1. **复制模板** `assets/report_template.md` 到工作目录（如 `work/report/report.md`），逐节替换 `{{占位符}}`，删除模板内注释指引。章节顺序与必填内容见 `references/report-structure.md`，**不要从零自由发挥章节结构**（避免图号错位、漏章节）。图片路径相对该 md 文件（例：`figs/fig01_opening.jpg`）。
+=======
+1. 按 `references/report-structure.md` 的章节骨架写 Markdown 报告，文件放到工作目录，**图片路径相对该 md 文件**（例：`frames/L1/L1_000003.jpg`）。
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 
 2. 封面用注释块声明：
 
@@ -213,11 +232,15 @@ stamp: 规则依据 references/rules.md；不可判定项已显式标注。
 | `references/rules.md` | 百业战规则与机制库、常见失误对照表（裁判依据） |
 | `references/analysis-framework.md` | 三维度检查项、抽帧策略、定级标准、评分量表、时间轴规范 |
 | `references/report-structure.md` | PDF 章节骨架、Markdown 书写约定、写作红线 |
+<<<<<<< HEAD
 | `references/hud-layout.md` | HUD 区域坐标标定与重标定指南（配合 make_strips.py） |
+=======
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 | `scripts/check_env.py` | 环境自检 |
 | `scripts/probe_video.py` | 媒体探针 |
 | `scripts/extract_frames.py` | 分层抽帧（uniform / ranges / scene / times） |
 | `scripts/make_contact_sheet.py` | 帧拼图，用于低成本目视浏览 |
+<<<<<<< HEAD
 | `scripts/make_strips.py` | HUD 放大条带（比分/计时/鹅血/墙杯/播报小字的唯一可靠读法） |
 | `scripts/run_pipeline.py` | 一键编排：probe → L1/L2/scene → HUD 条带 |
 | `scripts/build_report.py` | Markdown → HTML → PDF（含封面、目录、页眉页脚、书签） |
@@ -231,3 +254,7 @@ stamp: 规则依据 references/rules.md；不可判定项已显式标注。
 - **换机器**：整目录复制 + `pip install pillow pymupdf markdown imageio-ffmpeg` 即可（ffmpeg 由 imageio-ffmpeg 自带，浏览器缺失自动降级）。
 - **每场复盘的标准开场**：`run_pipeline.py <录像> --work work` → 读 `PIPELINE_DIGEST.json` → 读 HUD 条带。
 - **版本升级**：游戏 HUD 改版时按 `references/hud-layout.md` §3 重新标定，同步更新 `make_strips.py` 的 `DEFAULT_REGIONS`。 |
+=======
+| `scripts/build_report.py` | Markdown → HTML → PDF（含封面、目录、页眉页脚、书签） |
+| `assets/report.css` | 报告版式样式 |
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88

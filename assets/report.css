@@ -161,11 +161,16 @@ figure {
   margin: 4mm 0; page-break-inside: avoid; break-inside: avoid; text-align: center;
 }
 figure img {
+<<<<<<< HEAD
   max-width: 100%; max-height: 190mm; border: 1px solid var(--line); border-radius: 3px;
+=======
+  max-width: 100%; border: 1px solid var(--line); border-radius: 3px;
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 }
 figcaption {
   font-size: 8.5pt; color: var(--ink-mute); margin-top: 1.5mm; text-align: center;
 }
+<<<<<<< HEAD
 /* 单张图片必须整体留在同一页：
    ① 段落不跨页；② 图片同时受 width/height 双约束，保证按比例缩小到一页内，
    否则高瘦型（接触表 / 长截图）会被分页裁切。 */
@@ -173,6 +178,9 @@ p:has(> img) { page-break-inside: avoid; break-inside: avoid; }
 /* 图题（紧跟图片的段落）不得与图片分离 */
 p:has(> img) + p { page-break-before: avoid; break-before: avoid; }
 img { max-width: 100%; max-height: 190mm; height: auto; object-fit: contain; }
+=======
+img { max-width: 100%; }
+>>>>>>> fa90be3627d3e2e426588ad552d59e1d5bbe7e88
 
 /* 帧网格（附录） */
 .frame-grid {
